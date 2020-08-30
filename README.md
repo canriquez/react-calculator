@@ -16,9 +16,9 @@ Additional description about the project and its features.
 - VSCode
 
 
-## Live Demo
+## Live Demo @Heroku
 
-[Live Demo Link](https://livedemo.com)
+[Live Demo Link](https://anriquez-react-calcu.herokuapp.com)
 
 
 ## Getting Started
