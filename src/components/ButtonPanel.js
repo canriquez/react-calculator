@@ -4,7 +4,7 @@ import Button from './Button';
 const ButtonPanel = () => {
   const panelKeys = {
     1: ['AC', '+/-', '%', '÷'],
-    2: ['7', '8', '9', 'X'],
+    2: ['7', '8', '9', 'x'],
     3: ['4', '5', '6', '-'],
     4: ['1', '2', '3', '+'],
     5: ['0', '.', '='],
@@ -12,7 +12,7 @@ const ButtonPanel = () => {
   const panelTag = [];
   Object.keys(panelKeys).forEach(key => {
     panelTag.push(
-      <div key={`row_${key}`}>
+      <div className="buttonRow" key={`row_${key}`}>
         {panelKeys[key].map(bttn => (
           <Button
             key={`btn_${bttn}`}

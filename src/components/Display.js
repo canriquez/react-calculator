@@ -6,7 +6,7 @@ const Display = props => {
   return (
 
     <div id="displayWrap">
-      <h2 className="displayNumbers">
+      <h2 id="displayNumbers">
         {result}
       </h2>
     </div>

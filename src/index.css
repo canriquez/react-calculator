@@ -6,3 +6,53 @@
   -moz-box-sizing: border-box;
   transition: all 0.2s ease-in-out;
 }
+
+
+.calcWrap {
+  position: absolute;
+  top:1%;
+  left:50%;
+  transform: translateX(-50%);
+
+  width: 700px;
+}
+
+#displayWrap {
+  background-color: rgb(133,134,147);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  height: 100px;
+}
+
+#displayNumbers {
+  color: white;
+  padding: 10px;
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: rgb(224,224,224);
+  height: 100px;
+}
+
+.allBtn {
+  width: 25%;
+  color: black;
+  font-size: 2rem;
+  border: 2px outset rgba(209,209,209);
+  border-radius: 0;
+}
+
+.zeroBtn {
+  flex-grow: 1;
+  color: black;
+  font-size: 2rem;
+  appearance: unset;
+}
