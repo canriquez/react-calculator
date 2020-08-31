@@ -17,7 +17,7 @@ const ButtonPanel = () => {
           <Button
             key={`btn_${bttn}`}
             buttonName={bttn}
-            wide={bttn === '0' ? true : false}
+            wide={bttn === '0'}
             color={i !== panelKeys[key].length - 1 ? 'gray' : 'orange'}
           />
         ))}

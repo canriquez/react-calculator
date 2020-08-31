@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 const Button = props => {
   const { buttonName, wide, color } = props;
   let buttonStyles = '';
-  wide ? buttonStyles += 'wide button' : buttonStyles += 'small button';
-  buttonStyles += ' ' + color;
+  if (wide) {
+    buttonStyles += 'wide button';
+  } else {
+    buttonStyles += 'small button';
+  }
+  buttonStyles += ` ${color}`;
 
   return (
     <button
@@ -23,7 +27,7 @@ const Button = props => {
 Button.defaultProps = {
   buttonName: 'H',
   wide: false,
-  color: 'orange'
+  color: 'orange',
 };
 Button.propTypes = {
   buttonName: PropTypes.string,
