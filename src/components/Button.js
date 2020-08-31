@@ -17,7 +17,7 @@ const Button = props => {
 };
 
 Button.defaultProps = {
-  buttonName: 'H',
+  buttonName: '',
   buttonType: '',
 };
 Button.propTypes = {
