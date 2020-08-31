@@ -6,7 +6,7 @@
 
 ![screenshot](./app_screenshot.jpg)
 
-Additional description about the project and its features.
+Calculator App, build with React.js. Practicing React Component classes, states and props.
 
 ## Built With
 
