@@ -2,24 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Display = props => {
-    const { result } = props;
-    return (
+  const { result } = props;
+  return (
 
-        <div id="displayWrap">
-            <h2 className="displayNumbers">
-                {result}
-            </h2>
-        </div>
-    );
+    <div id="displayWrap">
+      <h2 className="displayNumbers">
+        {result}
+      </h2>
+    </div>
+  );
 };
 
-//Defaults and proptypes
+// Defaults and proptypes
 Display.propTypes = {
-    result: PropTypes.string,
+  result: PropTypes.string,
 };
 
 Display.defaultProps = {
-    result: '0',
+  result: '0',
 };
 
 export default Display;
