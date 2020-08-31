@@ -25,7 +25,7 @@ const Button = props => {
 };
 
 Button.defaultProps = {
-  buttonName: 'H',
+  buttonName: '',
   wide: false,
   color: 'orange',
 };
