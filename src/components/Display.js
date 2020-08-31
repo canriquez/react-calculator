@@ -5,7 +5,7 @@ const Display = props => {
   const { result } = props;
   return (
 
-    <div id="displayWrap">
+    <div id="display-container">
       <h2 id="displayNumbers">
         {result}
       </h2>

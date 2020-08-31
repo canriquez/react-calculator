@@ -26,7 +26,7 @@ const ButtonPanel = () => {
   });
 
   return (
-    <div className="pannelBoard">
+    <div id="button-panel">
       {panelTag}
     </div>
 
