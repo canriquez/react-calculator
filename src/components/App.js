@@ -6,11 +6,12 @@ import calculate from '../logic/calculate'
 
 const obj = {
   total: '10',
-  next: '22',
-  operation: '-'
+  next: '30',
+  operation: null
 }
+
 let result = calculate(obj, '%')
-console.log(result)
+console.log(result.total)
 
 const App = () => (
   <div id="app-container">

@@ -5,24 +5,19 @@ const operate = (numberOne, numberTwo, operation) => {
 
     const nOne = Big(numberOne);
     const nTwo = Big(numberTwo);
-    console.log('n1: ' + nOne);
-    console.log('n2: ' + nTwo);
-
-    /*     if (operation === '+') {
-            console.log('es una suma');
-            return nOne.plus(nTwo);
-        }
-    
-        if (operation === '-') {
-            console.log('es una suma');
-            return nOne.plus(nTwo);
-        } */
 
     switch (operation) {
         case '÷':
-            return (nOne / nTwo).toString();
+            console.log('es una div en switch');
+            if (numberTwo === 0) {
+                console.log('nTwo is zero');
+                return 'infinit'
+            } else {
+                return nOne.div(nTwo).toString();
+            }
         case 'x':
-            return (nOne * nTwo).toString();
+            console.log('es una mult en switch');
+            return nOne.times(nTwo).toString();
         case '-':
             console.log('es una resta en switch');
             return nOne.minus(nTwo).toString();
