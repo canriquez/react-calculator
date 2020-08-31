@@ -13,11 +13,12 @@ const ButtonPanel = () => {
   Object.keys(panelKeys).forEach(key => {
     panelTag.push(
       <div className="buttonRow" key={`row_${key}`}>
-        {panelKeys[key].map(bttn => (
+        {panelKeys[key].map((bttn, i) => (
           <Button
             key={`btn_${bttn}`}
             buttonName={bttn}
-            buttonType={bttn === '0' ? 'zeroBtn' : 'allBtn'}
+            wide={bttn === '0' ? true : false}
+            color={i !== panelKeys[key].length - 1 ? 'gray' : 'orange'}
           />
         ))}
       </div>,

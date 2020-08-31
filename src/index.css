@@ -38,21 +38,28 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: rgb(224,224,224);
   height: 100px;
 }
 
-.allBtn {
-  width: 25%;
+.button {
   color: black;
   font-size: 2rem;
+  background: rgb(224,224,224);
   border: 2px outset rgba(209,209,209);
-  border-radius: 0;
 }
 
-.zeroBtn {
-  flex-grow: 1;
-  color: black;
-  font-size: 2rem;
-  appearance: unset;
+.small {
+  width: 25%;
+}
+
+.wide {
+  width: 50%;
+}
+
+.orange {
+  background: rgb(245,145,62);
+}
+
+.gray {
+  background: rgb(224,224,224);
 }
