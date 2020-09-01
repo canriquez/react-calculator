@@ -41,6 +41,14 @@ const calculate = (calcData, buttonName) => {
     }
 
     if (buttonName === 'AC') {
+        //clear second number in the operation
+        if (next && operation) {
+            return {
+                total,
+                next: null,
+                operation,
+            };
+        }
         return {
             total: null,
             next: null,
@@ -52,7 +60,7 @@ const calculate = (calcData, buttonName) => {
         if (operation) {
             return {
                 total: (parseFloat(operate(total, next, operation))).toString(),
-                next,
+                next: null,
                 operation: null,
             };
         }
@@ -63,18 +71,6 @@ const calculate = (calcData, buttonName) => {
         };
     }
 
-    // If button name has an operator other than the previous cases
-    // I consider it can only be [÷x-+]
-
-    /* if (buttonName && total && next) {
-        // User wants to add a new operation. so we solve the current first
-        return {
-            total: operate(total, next, operation),
-            next: null,
-            operation: buttonName,
-        };
-    } */
-
     if (isOperation(buttonName) && total && !operation) {
         console.log('first number is there, catching now next :');
         return {
@@ -83,8 +79,17 @@ const calculate = (calcData, buttonName) => {
             operation: buttonName,
         };
     }
+    // solve opeartions concatenation
+    if (isOperation(buttonName) && total && operation) {
+        console.log('first number is there, catching now next :');
+        return {
+            total: Big(operate(total, next, operation)).toString(),
+            next: null,
+            operation: buttonName,
+        };
+    }
 
-    //if user his a number key, we start constructing the operations input
+    //if user hits a number key, we start constructing the operations input
 
     if (buttonName.match(/\d/)) {
         console.log('it is a number')
