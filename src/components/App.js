@@ -5,6 +5,7 @@ import ButtonPanel from './ButtonPanel';
 import calculate from '../logic/calculate'
 
 const App = () => (
+
   <div id="app-container">
     <Display />
     <ButtonPanel />
