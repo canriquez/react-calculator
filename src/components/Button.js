@@ -2,6 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = props => {
+
+
+  const handleClick = (e) => {
+    e.stopPropagation()
+    console.log(e.target.id)
+    props.clickHandler(e.target.id)
+  }
+
   const { buttonName, wide, color } = props;
   let buttonStyles = '';
   if (wide) {
@@ -13,6 +21,8 @@ const Button = props => {
 
   return (
     <button
+      id={buttonName}
+      onClick={handleClick}
       type="button"
       key={`tecla_${buttonName}`}
       className={buttonStyles}
