@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Display = props => {
-  // const { result } = props;
-
-  console.log(`props in display :${props.result}`);
+  const { result } = props;
   return (
 
     <div id="display-container">
       <h2 id="displayNumbers">
-        {props.result || '0'}
+        {result || '0'}
       </h2>
     </div>
   );

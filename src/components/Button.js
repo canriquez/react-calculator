@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 const Button = props => {
   const handleClick = e => {
     e.stopPropagation();
-    console.log(e.target.id);
     props.clickHandler(e.target.id);
   };
 
@@ -36,11 +35,13 @@ Button.defaultProps = {
   buttonName: '',
   wide: false,
   color: 'orange',
+  clickHandler: null,
 };
 Button.propTypes = {
   buttonName: PropTypes.string,
   wide: PropTypes.bool,
   color: PropTypes.string,
+  clickHandler: PropTypes.func,
 };
 
 export default Button;
