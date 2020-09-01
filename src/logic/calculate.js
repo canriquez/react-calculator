@@ -71,6 +71,8 @@ const calculate = (calcData, buttonName) => {
         };
     }
 
+    //if user hist and operation after valid first number
+
     if (isOperation(buttonName) && total && !operation) {
         console.log('first number is there, catching now next :');
         return {
@@ -79,7 +81,7 @@ const calculate = (calcData, buttonName) => {
             operation: buttonName,
         };
     }
-    // solve opeartions concatenation
+    // if user hist operation instead of '='. (solve opeartions concatenation)
     if (isOperation(buttonName) && total && operation) {
         console.log('first number is there, catching now next :');
         return {
@@ -108,6 +110,25 @@ const calculate = (calcData, buttonName) => {
 
     } else {
         // if user hit operations but total and next are null, we do nothing and come back
+        if (buttonName === '.' && (total || next)) {
+            //if total gets a valid decimal period
+            if (!next && !total.includes('.')) {
+                return {
+                    total: total += '.',
+                    next,
+                    operation
+                }
+            } else if (!next.includes('.')) {
+                //if total next a valid decimal period
+                return {
+                    total,
+                    next: next += '.',
+                    operation
+                }
+            }
+
+        }
+
         console.log('nothing to do or calculate')
     };
 };
