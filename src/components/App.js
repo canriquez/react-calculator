@@ -3,14 +3,7 @@ import Display from './Display';
 import ButtonPanel from './ButtonPanel';
 // eslint-disable-next-line
 import calculate from '../logic/calculate'
-/* 
-const App = () => (
 
-  <div id="app-container">
-    <Display />
-    <ButtonPanel />
-  </div>
-); */
 
 class App extends React.Component {
   constructor(props) {
@@ -20,13 +13,19 @@ class App extends React.Component {
       next: null,
       operation: null
     }
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(buttonName) {
+    this.setState(calculate(this.state, buttonName));
   }
 
   render() {
     return (
       <div id="app-container">
-        <Display />
-        <ButtonPanel />
+        <Display result={this.operation ? this.next : this.total} />
+        <ButtonPanel clickHandler={this.handleClick} />
       </div>
     )
   }
