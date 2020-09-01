@@ -6,3 +6,64 @@
   -moz-box-sizing: border-box;
   transition: all 0.2s ease-in-out;
 }
+
+#app-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+}
+
+#display-container {
+  background-color: rgb(133, 134, 147);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100px;
+}
+
+#button-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+#displayNumbers {
+  color: white;
+  padding: 10px;
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.button {
+  color: black;
+  font-size: 2rem;
+  background: rgb(224, 224, 224);
+  border: 2px outset rgba(209, 209, 209);
+}
+
+.small {
+  width: 25%;
+}
+
+.wide {
+  width: 50%;
+}
+
+.orange {
+  background: rgb(245, 145, 62);
+}
+
+.gray {
+  background: rgb(224, 224, 224);
+}

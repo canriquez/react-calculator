@@ -4,7 +4,7 @@ import Button from './Button';
 const ButtonPanel = () => {
   const panelKeys = {
     1: ['AC', '+/-', '%', '÷'],
-    2: ['7', '8', '9', 'X'],
+    2: ['7', '8', '9', 'x'],
     3: ['4', '5', '6', '-'],
     4: ['1', '2', '3', '+'],
     5: ['0', '.', '='],
@@ -12,12 +12,13 @@ const ButtonPanel = () => {
   const panelTag = [];
   Object.keys(panelKeys).forEach(key => {
     panelTag.push(
-      <div key={`row_${key}`}>
-        {panelKeys[key].map(bttn => (
+      <div className="buttonRow" key={`row_${key}`}>
+        {panelKeys[key].map((bttn, i) => (
           <Button
             key={`btn_${bttn}`}
             buttonName={bttn}
-            buttonType={bttn === '0' ? 'zeroBtn' : 'allBtn'}
+            wide={bttn === '0'}
+            color={i !== panelKeys[key].length - 1 ? 'gray' : 'orange'}
           />
         ))}
       </div>,
@@ -25,7 +26,7 @@ const ButtonPanel = () => {
   });
 
   return (
-    <div className="pannelBoard">
+    <div id="button-panel">
       {panelTag}
     </div>
 

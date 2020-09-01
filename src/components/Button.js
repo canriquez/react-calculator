@@ -2,12 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = props => {
-  const { buttonName, buttonType } = props;
+  const { buttonName, wide, color } = props;
+  let buttonStyles = '';
+  if (wide) {
+    buttonStyles += 'wide button';
+  } else {
+    buttonStyles += 'small button';
+  }
+  buttonStyles += ` ${color}`;
+
   return (
     <button
       type="button"
       key={`tecla_${buttonName}`}
-      className={buttonType}
+      className={buttonStyles}
     >
       {' '}
       {buttonName}
@@ -18,11 +26,13 @@ const Button = props => {
 
 Button.defaultProps = {
   buttonName: '',
-  buttonType: '',
+  wide: false,
+  color: 'orange',
 };
 Button.propTypes = {
   buttonName: PropTypes.string,
-  buttonType: PropTypes.string,
+  wide: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 export default Button;
