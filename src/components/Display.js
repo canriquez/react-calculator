@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Display = props => {
-  const { result } = props;
+  //const { result } = props;
+
+  console.log('props in display :' + props.result)
   return (
 
     <div id="display-container">
       <h2 id="displayNumbers">
-        {result}
+        {props.result || '0'}
       </h2>
     </div>
   );
@@ -21,5 +23,6 @@ Display.propTypes = {
 Display.defaultProps = {
   result: '0',
 };
+
 
 export default Display;

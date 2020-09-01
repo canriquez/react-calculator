@@ -1,5 +1,6 @@
 import Big from 'big.js';
 import operate from './operate';
+import { render } from '@testing-library/react';
 
 const calculate = (calcData, buttonName) => {
     let { total, next, operation } = calcData;
@@ -24,8 +25,10 @@ const calculate = (calcData, buttonName) => {
             operation,
         };
     }
-
+    // applies percentage calculation
     if (buttonName === '%') {
+        // when operation exist, applies to the percent to total after 
+        // executing operation 
         if (operation) {
             return {
                 total: (Big(operate(total, next, operation)).div(100)).toString(),
@@ -33,6 +36,7 @@ const calculate = (calcData, buttonName) => {
                 operation: null,
             };
         }
+        // when no operation exist, applies percent to total only 
         return {
             total: (Big(total).div(100).toString()),
             next,
@@ -45,7 +49,7 @@ const calculate = (calcData, buttonName) => {
         if (next && operation) {
             return {
                 total,
-                next: null,
+                next: '0',
                 operation,
             };
         }
@@ -56,14 +60,18 @@ const calculate = (calcData, buttonName) => {
         };
     }
 
+    // If use hits equal
+
     if (buttonName === '=') {
         if (operation) {
+            //when opertion exist. executes the operation
             return {
-                total: (parseFloat(operate(total, next, operation))).toString(),
+                total: operate(total, next, operation),
                 next: null,
                 operation: null,
             };
         }
+        //If no operation exist, exits with no change
         return {
             total,
             next,
@@ -71,9 +79,9 @@ const calculate = (calcData, buttonName) => {
         };
     }
 
-    //if user hist and operation after valid first number
-
+    //if user hist an operation after valid first number
     if (isOperation(buttonName) && total && !operation) {
+        //store operation when no operation exists.
         console.log('first number is there, catching now next :');
         return {
             total,
@@ -81,8 +89,9 @@ const calculate = (calcData, buttonName) => {
             operation: buttonName,
         };
     }
-    // if user hist operation instead of '='. (solve opeartions concatenation)
+    // if user hist another operation with total and next. (solve opeartions concatenation)
     if (isOperation(buttonName) && total && operation) {
+        //solves the current operatoin. clear next and stores new operation
         console.log('first number is there, catching now next :');
         return {
             total: Big(operate(total, next, operation)).toString(),
@@ -95,12 +104,18 @@ const calculate = (calcData, buttonName) => {
 
     if (buttonName.match(/\d/)) {
         console.log('it is a number')
-        if (!operation) { // is the first number
+        if (!operation) {
+            // builds first number
             console.log('first number')
-            !total ? total = buttonName : total += buttonName;
+            !total ? total = buttonName :
+                ((total === '0' || total === 'Error') ?
+                    total = buttonName : total += buttonName);
+
         } else {
+            //builds second number. 
             console.log('second number')
-            !next ? next = buttonName : next += buttonName;
+            !next ? next = buttonName :
+                (next === '0' ? next = buttonName : next += buttonName);
         }
         return {
             total,
@@ -119,7 +134,7 @@ const calculate = (calcData, buttonName) => {
                     operation
                 }
             } else if (!next.includes('.')) {
-                //if total next a valid decimal period
+                //if next gets a valid decimal period
                 return {
                     total,
                     next: next += '.',

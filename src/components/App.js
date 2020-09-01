@@ -30,8 +30,7 @@ class App extends React.Component {
         <Display result={
           this.state.operation ?
             (!this.state.next ? this.state.total : this.state.next) :
-            this.state.total
-        } />
+            this.state.total} />
         <ButtonPanel clickHandler={this.handleClick} />
       </div>
     )
