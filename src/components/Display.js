@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Display = props => {
-  //const { result } = props;
+  // const { result } = props;
 
-  console.log('props in display :' + props.result)
+  console.log(`props in display :${props.result}`);
   return (
 
     <div id="display-container">
@@ -23,6 +23,5 @@ Display.propTypes = {
 Display.defaultProps = {
   result: '0',
 };
-
 
 export default Display;

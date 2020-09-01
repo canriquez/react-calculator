@@ -1,24 +1,22 @@
 import Big from 'big.js';
-import operate from './operate';
 import { render } from '@testing-library/react';
+import operate from './operate';
 
 const calculate = (calcData, buttonName) => {
     let { total, next, operation } = calcData;
-    const operationTypes = ['+', '-', '÷', 'x']
+    const operationTypes = ['+', '-', '÷', 'x'];
 
-
-    const isOperation = (ops) => {
-        return operationTypes.includes(ops);
-    }
+    const isOperation = ops => operationTypes.includes(ops);
 
     if (buttonName === '+/-') {
-        if (operation) {
+        if (operation && next != '0') {
             return {
                 total,
                 next: (Big(next).times(-1)).toString(),
                 operation,
             };
         }
+        if (!total || total === '0') { return { total, next, operation } }
         return {
             total: (Big(total).times(-1)).toString(),
             next,
@@ -27,8 +25,8 @@ const calculate = (calcData, buttonName) => {
     }
     // applies percentage calculation
     if (buttonName === '%') {
-        // when operation exist, applies to the percent to total after 
-        // executing operation 
+        // when operation exist, applies to the percent to total after
+        // executing operation
         if (operation) {
             return {
                 total: (Big(operate(total, next, operation)).div(100)).toString(),
@@ -36,7 +34,7 @@ const calculate = (calcData, buttonName) => {
                 operation: null,
             };
         }
-        // when no operation exist, applies percent to total only 
+        // when no operation exist, applies percent to total only
         return {
             total: (Big(total).div(100).toString()),
             next,
@@ -45,7 +43,7 @@ const calculate = (calcData, buttonName) => {
     }
 
     if (buttonName === 'AC') {
-        //clear second number in the operation
+        // clear second number in the operation
         if (next && operation) {
             return {
                 total,
@@ -64,14 +62,14 @@ const calculate = (calcData, buttonName) => {
 
     if (buttonName === '=') {
         if (operation) {
-            //when opertion exist. executes the operation
+            // when opertion exist. executes the operation
             return {
                 total: operate(total, next, operation),
                 next: null,
                 operation: null,
             };
         }
-        //If no operation exist, exits with no change
+        // If no operation exist, exits with no change
         return {
             total,
             next,
@@ -79,9 +77,9 @@ const calculate = (calcData, buttonName) => {
         };
     }
 
-    //if user hist an operation after valid first number
+    // if user hist an operation after valid first number
     if (isOperation(buttonName) && total && !operation) {
-        //store operation when no operation exists.
+        // store operation when no operation exists.
         console.log('first number is there, catching now next :');
         return {
             total,
@@ -91,7 +89,7 @@ const calculate = (calcData, buttonName) => {
     }
     // if user hist another operation with total and next. (solve opeartions concatenation)
     if (isOperation(buttonName) && total && operation) {
-        //solves the current operatoin. clear next and stores new operation
+        // solves the current operatoin. clear next and stores new operation
         console.log('first number is there, catching now next :');
         return {
             total: Big(operate(total, next, operation)).toString(),
@@ -100,52 +98,48 @@ const calculate = (calcData, buttonName) => {
         };
     }
 
-    //if user hits a number key, we start constructing the operations input
+    // if user hits a number key, we start constructing the operations input
 
     if (buttonName.match(/\d/)) {
-        console.log('it is a number')
+        console.log('it is a number');
         if (!operation) {
             // builds first number
-            console.log('first number')
-            !total ? total = buttonName :
-                ((total === '0' || total === 'Error') ?
-                    total = buttonName : total += buttonName);
-
+            console.log('first number');
+            !total ? total = buttonName
+                : ((total === '0' || total === 'Error')
+                    ? total = buttonName : total += buttonName);
         } else {
-            //builds second number. 
-            console.log('second number')
-            !next ? next = buttonName :
-                (next === '0' ? next = buttonName : next += buttonName);
+            // builds second number.
+            console.log('second number');
+            !next ? next = buttonName
+                : (next === '0' ? next = buttonName : next += buttonName);
         }
         return {
             total,
             next,
             operation,
+        };
+    }
+    // if user hit operations but total and next are null, we do nothing and come back
+    if (buttonName === '.' && (total || next)) {
+        // if total gets a valid decimal period
+        if (!next && !total.includes('.')) {
+            return {
+                total: total += '.',
+                next,
+                operation,
+            };
+        } if (!next.includes('.')) {
+            // if next gets a valid decimal period
+            return {
+                total,
+                next: next += '.',
+                operation,
+            };
         }
+    }
 
-    } else {
-        // if user hit operations but total and next are null, we do nothing and come back
-        if (buttonName === '.' && (total || next)) {
-            //if total gets a valid decimal period
-            if (!next && !total.includes('.')) {
-                return {
-                    total: total += '.',
-                    next,
-                    operation
-                }
-            } else if (!next.includes('.')) {
-                //if next gets a valid decimal period
-                return {
-                    total,
-                    next: next += '.',
-                    operation
-                }
-            }
-
-        }
-
-        console.log('nothing to do or calculate')
-    };
+    console.log('nothing to do or calculate');
 };
 
 export default calculate;

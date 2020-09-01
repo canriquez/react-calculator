@@ -1,12 +1,11 @@
 import React from 'react';
 import Button from './Button';
 
-const ButtonPanel = (props) => {
-
-  const handleClick = (buttonName) => {
-    console.log('back in Panel, butonName is : ' + buttonName)
+const ButtonPanel = props => {
+  const handleClick = buttonName => {
+    console.log(`back in Panel, butonName is : ${buttonName}`);
     props.clickHandler(buttonName);
-  }
+  };
 
   const panelKeys = {
     1: ['AC', '+/-', '%', '÷'],
