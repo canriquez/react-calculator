@@ -22,14 +22,16 @@ class App extends React.Component {
     this.setState(calculate(this.state, buttonName), () => {
       console.log(this.state);
     });
-
-
   }
 
   render() {
     return (
       <div id="app-container">
-        <Display result={this.state.total} />
+        <Display result={
+          this.state.operation ?
+            (!this.state.next ? this.state.total : this.state.next) :
+            this.state.total
+        } />
         <ButtonPanel clickHandler={this.handleClick} />
       </div>
     )
