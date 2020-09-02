@@ -4,7 +4,7 @@
 
 > React calculator bootstrapped with create-react-app
 
-![screenshot](./app_screenshot.jpg)
+![screenshot](./app_screenshot.png)
 
 Calculator App, build with React.js. Practicing React Component classes, states and props.
 
