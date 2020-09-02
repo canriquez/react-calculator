@@ -22,9 +22,13 @@ class App extends React.Component {
     this.handleKey = this.handleKey.bind(this);
     this.toggleSpeech = this.toggleSpeech.bind(this);
     this.toggleLanguage = this.toggleLanguage.bind(this);
+    this.pttDisplay = this.pttDisplay.bind(this);
   }
 
+
+
   handleClick(buttonName) {
+    const speechBar = ['Speech', 'En', 'Sp', 'PTT'];
 
     if (buttonName === 'Speech') {
       this.toggleSpeech();
@@ -40,10 +44,14 @@ class App extends React.Component {
 
     const currentResult = calculate(this.state, buttonName);
     this.setState(currentResult);
-    talkPolly(this.state.total || '');
+
+    if (this.state.speech && !speechBar.includes(buttonName)) {
+      talkPolly(this.state, buttonName);
+    }
   }
 
   handleKey(e) {
+    const speechBar = ['Speech', 'En', 'Sp', 'PTT'];
     e.stopPropagation();
 
     let keyName = e.key;
@@ -60,13 +68,30 @@ class App extends React.Component {
       return
     }
 
+    if ((keyName === 'p') && this.state.speech) {
+      console.log('about to toggle ptt')
+      this.pttDisplay();
+      return
+    } else if (keyName === 'p') {
+      return
+    }
+
     if (e.key === '/') { keyName = '÷' };
+    if (e.key === 'x' || e.key === '*') { keyName = 'x' };
     if (e.key === 'Backspace') { keyName = 'AC' };
     if (e.key === 'Enter') { keyName = '=' };
     if (e.key === '_') { keyName = '+/-' }
     const currentResult = calculate(this.state, keyName);
     this.setState(currentResult);
-    talkPolly(this.state.total || '');
+    if (this.state.speech && !speechBar.includes(keyName)) {
+      if (keyName === '-') { keyName = 'minus' };
+      if (keyName === 'x' && this.lang === 'Mia') { keyName = 'multiplicado por' };
+      if (keyName === 'x' && this.lang === 'Joanna') { keyName = 'multiplied by' };
+      if (keyName === '+/-') { keyName = 'negative' };
+      if (keyName === 'Shift') { return };
+
+      talkPolly(this.state, keyName);
+    }
   }
 
   toggleSpeech() {
@@ -116,6 +141,16 @@ class App extends React.Component {
       offIcon('es');
       //hide little icon on speach top left of screen
     }
+  }
+
+  pttDisplay() {
+    const { total, next, operation } = this.state;
+    let resultToRender = '';
+    if (operation && !next) { resultToRender = total; }
+    if (operation && next) { resultToRender = next; }
+    if (!operation) { resultToRender = total; }
+    talkPolly(this.state, resultToRender);
+    return
   }
 
   componentDidMount() {
