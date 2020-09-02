@@ -27,9 +27,14 @@ const calculate = (calcData, buttonName) => {
   if (buttonName === '%') {
     // when operation exist, applies to the percent to total after
     // executing operation
+    console.log('trying %..');
     if (operation && (total !== '0' || next !== '0')) {
+      console.log(" operation and total " + total + " or next " + next);
+      let ops = operate(total, next, operation);
+      let result;
+      ops !== 'Error' ? result = Big(ops).div(100).toString() : result = ops;
       return {
-        total: (Big(operate(total, next, operation)).div(100)).toString(),
+        total: result,
         next: null,
         operation: null,
       };
@@ -88,11 +93,23 @@ const calculate = (calcData, buttonName) => {
     };
   }
   // if user hist another operation with total and next. (solve opeartions concatenation)
-  if (isOperation(buttonName) && total && operation) {
+  if (isOperation(buttonName) && total && next && operation) {
     // solves the current operatoin. clear next and stores new operation
+    console.log('entered operation...');
     return {
       total: Big(operate(total, next, operation)).toString(),
       next: null,
+      operation: buttonName,
+    };
+  }
+
+  // if user hist another operation with total and no next. updates operation
+  if (isOperation(buttonName) && total && !next) {
+    // solves the current operatoin. clear next and stores new operation
+    console.log('entered new operation...');
+    return {
+      total,
+      next,
       operation: buttonName,
     };
   }

@@ -23,8 +23,6 @@ class App extends React.Component {
   }
 
   handleKey(e) {
-    console.log('catching a key');
-    console.log(e.key)
     let keyName = e.key;
 
     if (e.key === '/') { keyName = '÷' };

@@ -9,6 +9,7 @@ const Button = props => {
     props.clickHandler(e.target.id);
   };
 
+
   const { buttonName, wide, color } = props;
   let buttonStyles = '';
   if (wide) {
