@@ -27,7 +27,7 @@ const calculate = (calcData, buttonName) => {
   if (buttonName === '%') {
     // when operation exist, applies to the percent to total after
     // executing operation
-    if (operation) {
+    if (operation && (total !== '0' || next !== '0')) {
       return {
         total: (Big(operate(total, next, operation)).div(100)).toString(),
         next: null,
@@ -35,6 +35,7 @@ const calculate = (calcData, buttonName) => {
       };
     }
     // when no operation exist, applies percent to total only
+    if (!total || total === '0') { return { total, next, operation }; }
     return {
       total: (Big(total).div(100).toString()),
       next,

@@ -14,11 +14,29 @@ class App extends React.Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleKey = this.handleKey.bind(this);
   }
 
   handleClick(buttonName) {
     const currentResult = calculate(this.state, buttonName);
     this.setState(currentResult);
+  }
+
+  handleKey(e) {
+    console.log('catching a key');
+    console.log(e.key)
+    let keyName = e.key;
+
+    if (e.key === '/') { keyName = '÷' };
+    if (e.key === 'Backspace') { keyName = 'AC' };
+    if (e.key === 'Enter') { keyName = '=' };
+    if (e.key === '_') { keyName = '+/-' }
+    const currentResult = calculate(this.state, keyName);
+    this.setState(currentResult);
+  }
+
+  componentDidMount() {
+    document.body.addEventListener('keydown', this.handleKey);
   }
 
   render() {

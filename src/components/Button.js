@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = props => {
+
   const handleClick = e => {
     e.stopPropagation();
+    console.log('key clicked');
     props.clickHandler(e.target.id);
   };
 
