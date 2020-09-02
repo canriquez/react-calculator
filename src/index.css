@@ -42,7 +42,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100px;
 }
 
 .button {
@@ -52,12 +51,33 @@
   border: 2px outset rgba(209, 209, 209);
 }
 
+.btop {
+  font-size: 2rem;
+  background: darkgray !important;
+  border: 1px outset white;
+}
+
+.disabled {
+  color: white;
+}
+
+.enabled {
+  color: lightgreen;
+}
+
 .small {
   width: 25%;
+  height: 100px;
+}
+
+.top-row {
+  width: 25%;
+  height: 50px;
 }
 
 .wide {
   width: 50%;
+  height: 100px;
 }
 
 .orange {
@@ -66,4 +86,19 @@
 
 .gray {
   background: rgb(224, 224, 224);
+}
+
+.speech-icon {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  color: white;
+}
+
+.onIcon {
+  display: block;
+}
+
+.offIcon {
+  display: none;
 }
