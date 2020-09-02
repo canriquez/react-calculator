@@ -7,7 +7,7 @@ const Display = props => {
 
     <div id="display-container">
       <h2 id="displayNumbers">
-        {result}
+        {result || '0'}
       </h2>
     </div>
   );

@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button';
 
-const ButtonPanel = () => {
+const ButtonPanel = props => {
+  const handleClick = buttonName => {
+    props.clickHandler(buttonName);
+  };
+
   const panelKeys = {
     1: ['AC', '+/-', '%', '÷'],
     2: ['7', '8', '9', 'x'],
@@ -10,11 +15,13 @@ const ButtonPanel = () => {
     5: ['0', '.', '='],
   };
   const panelTag = [];
+
   Object.keys(panelKeys).forEach(key => {
     panelTag.push(
       <div className="buttonRow" key={`row_${key}`}>
         {panelKeys[key].map((bttn, i) => (
           <Button
+            clickHandler={handleClick}
             key={`btn_${bttn}`}
             buttonName={bttn}
             wide={bttn === '0'}
@@ -31,6 +38,13 @@ const ButtonPanel = () => {
     </div>
 
   );
+};
+
+ButtonPanel.defaultProps = {
+  clickHandler: null,
+};
+ButtonPanel.propTypes = {
+  clickHandler: PropTypes.func,
 };
 
 export default ButtonPanel;
