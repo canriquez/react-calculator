@@ -92,8 +92,17 @@
   position: absolute;
   top: 5px;
   left: 10px;
-  color: white;
 }
+
+.lang-icon {
+  position: absolute;
+  top: 10px;
+  left: 45px;
+  color: black;
+  font-size: 1.1rem;
+}
+
+
 
 .onIcon {
   display: block;

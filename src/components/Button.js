@@ -45,7 +45,7 @@ Button.defaultProps = {
 };
 Button.propTypes = {
   buttonName: PropTypes.string,
-  wide: PropTypes.bool,
+  wide: PropTypes.number,
   color: PropTypes.string,
   clickHandler: PropTypes.func,
 };

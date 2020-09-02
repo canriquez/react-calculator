@@ -8,6 +8,8 @@ const Display = props => {
 
     <div id="display-container">
       <img id='speechico' src={speech} className='speech-icon offIcon' alt="speech" />
+      <span id='en' className='lang-icon offIcon'>En</span>
+      <span id='es' className='lang-icon offIcon'>Sp</span>
       <h2 id="displayNumbers">
         {result || '0'}
       </h2>

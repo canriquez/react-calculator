@@ -1,17 +1,19 @@
 import AWS from 'aws-sdk'
 
 
-const talkPolly = (text) => {
+const talkPolly = (conf, text) => {
     AWS.config.accessKeyId = 'AKIAJRSUK6E62EUILJZA';
     AWS.config.secretAccessKey = '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';
     AWS.config.region = 'us-east-2';
+
+    console.log(conf, text);
 
     let polly = new AWS.Polly();
     let params = {
         OutputFormat: "mp3",
         Text: text,
         TextType: "text",
-        VoiceId: "Joanna"
+        VoiceId: conf.lang
     }
 
     polly.synthesizeSpeech(params, function (err, data) {
