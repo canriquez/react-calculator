@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# React Calculator
+# Accesible React Calculator
 
 > Accessibility focused basic React calculator bootstrapped with create-react-app
 
