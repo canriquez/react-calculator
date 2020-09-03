@@ -57,24 +57,37 @@ class App extends React.Component {
     }
 
     const currentResult = calculate(this.state, buttonName);
-    this.setState(currentResult);
-    let ttSpeech = buttonName;
-    if (speech && !speechBar.includes(buttonName)) {
-      if (buttonName === '-' && lang === 'Joanna') { ttSpeech = 'minus'; }
-      if (buttonName === 'x' && lang === 'Mia') { ttSpeech = 'multiplicado por'; }
-      if (buttonName === '÷' && lang === 'Mia') { ttSpeech = 'dividido entre'; }
-      if (buttonName === '-' && lang === 'Mia') { ttSpeech = 'menos'; }
-      if (buttonName === 'x' && lang === 'Joanna') { ttSpeech = 'multiplied by'; }
-      if (buttonName === '+/-' && lang === 'Joanna') { ttSpeech = 'negative'; }
-      if (buttonName === '+/-' && lang === 'Mia') { ttSpeech = 'negativo'; }
-      if (buttonName === '=') { ttSpeech = `= ${total || '0'}`; }
-      talkPolly(this.state, ttSpeech);
-    }
+    console.log(buttonName);
+    this.setState(currentResult, () => {
+      let ttSpeech = buttonName;
+      console.log(this.state.total);
+      if (speech) {
+        if (buttonName === '-' && lang === 'Joanna') { ttSpeech = 'minus'; }
+        if (buttonName === 'x' && lang === 'Mia') { ttSpeech = 'multiplicado por'; }
+        if (buttonName === '÷' && lang === 'Mia') { ttSpeech = 'dividido entre'; }
+        if (buttonName === '-' && lang === 'Mia') { ttSpeech = 'menos'; }
+        if (buttonName === 'x' && lang === 'Joanna') { ttSpeech = 'multiplied by'; }
+        if (buttonName === '+/-' && lang === 'Joanna') { ttSpeech = 'negative'; }
+        if (buttonName === '+/-' && lang === 'Mia') { ttSpeech = 'negativo'; }
+
+        if (ttSpeech === '=') {
+          this.pttDisplay('= ');
+        } else {
+          talkPolly(this.state, ttSpeech);
+        }
+      };
+    })
+
   }
 
   handleKey(e) {
+
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     const {
-      total, speech, lang,
+      speech, lang,
     } = this.state;
     const allowedKeys = ['s', 'l', 'p', 'Enter', 'Backspace',
       '%', '/', '7', '8', '9', 'x', '4', '5', '6',
@@ -109,7 +122,7 @@ class App extends React.Component {
     if (e.key === '_') { keyName = '+/-'; }
     const currentResult = calculate(this.state, keyName);
     this.setState(currentResult);
-    if (speech /* && !speechBar.includes(keyName) */) {
+    if (speech) {
       if (keyName === '-' && lang === 'Joanna') { keyName = 'minus'; }
       if (keyName === 'x' && lang === 'Mia') { keyName = 'multiplicado por'; }
       if (keyName === '÷' && lang === 'Mia') { keyName = 'dividido entre'; }
@@ -117,9 +130,11 @@ class App extends React.Component {
       if (keyName === '+/-' && lang === 'Joanna') { keyName = 'negative'; }
       if (keyName === '+/-' && lang === 'Mia') { keyName = 'negativo'; }
       if (keyName === 'Shift') { return; }
-      if (keyName === '=' || keyName === 'Enter') { keyName = `= ${total || '0'}`; }
-
-      talkPolly(this.state, keyName);
+      if (keyName === '=' || keyName === 'Enter') {
+        this.pttDisplay('= ');
+      } else {
+        talkPolly(this.state, keyName);
+      }
     }
   }
 
@@ -171,14 +186,18 @@ class App extends React.Component {
     }
   }
 
-  pttDisplay() {
+  pttDisplay(txt = '') {
+    console.log(this.state);
     const { total, next, operation } = this.state;
     let resultToRender = '';
     if (operation && !next) { resultToRender = total; }
     if (operation && next) { resultToRender = next; }
-    if (!operation) { resultToRender = total; }
+    if (!operation && total) { resultToRender = total; }
+    resultToRender = txt + resultToRender;
+    console.log('result to render $$ ' + resultToRender)
+    if (resultToRender === '') { resultToRender = '= 0' }
 
-    talkPolly(this.state, resultToRender || '0');
+    talkPolly(this.state, resultToRender);
   }
 
   render() {
