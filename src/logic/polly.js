@@ -2,8 +2,8 @@ import AWS from 'aws-sdk'
 
 
 const talkPolly = (conf, text) => {
-    AWS.config.accessKeyId = 'AKIAJRSUK6E62EUILJZA';
-    AWS.config.secretAccessKey = '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';
+    AWS.config.accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID;
+    AWS.config.secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY;
     AWS.config.region = 'us-east-2';
 
     console.log(conf, text);
