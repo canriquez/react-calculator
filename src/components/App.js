@@ -42,6 +42,14 @@ class App extends React.Component {
       return
     }
 
+    if ((buttonName === 'PTT') && this.state.speech) {
+      console.log('about to toggle ptt')
+      this.pttDisplay();
+      return
+    } else if (buttonName === 'PTT') {
+      return
+    }
+
     const currentResult = calculate(this.state, buttonName);
     this.setState(currentResult);
 
