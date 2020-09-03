@@ -6,6 +6,7 @@ import talkPolly from '../logic/polly'
 import { onBtn, offBtn, onIcon, offIcon } from '../logic/helper'
 
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -59,8 +60,15 @@ class App extends React.Component {
   }
 
   handleKey(e) {
-    const speechBar = ['Speech', 'En', 'Sp', 'PTT'];
+
+
+    const allowedKeys = ['s', 'l', 'p', 'Enter', 'Backspace',
+      '%', '/', '7', '8', '9', 'x', '4', '5', '6',
+      '-', '_', '1', '2', '3', '+', '0', '.', '=']
+    if (!allowedKeys.includes(e.key)) { return }
     e.stopPropagation();
+    console.log('hit :' + e.key);
+    const speechBar = ['Speech', 'En', 'Sp', 'PTT'];
 
     let keyName = e.key;
     if (e.key === 's') {
@@ -97,8 +105,10 @@ class App extends React.Component {
       if (keyName === 'x' && this.lang === 'Joanna') { keyName = 'multiplied by' };
       if (keyName === '+/-') { keyName = 'negative' };
       if (keyName === 'Shift') { return };
+      if (keyName === '=' || keyName === 'Enter') { keyName = '= ' + (this.state.total ? this.state.total : '0') };
 
       talkPolly(this.state, keyName);
+
     }
   }
 
@@ -157,13 +167,13 @@ class App extends React.Component {
     if (operation && !next) { resultToRender = total; }
     if (operation && next) { resultToRender = next; }
     if (!operation) { resultToRender = total; }
-    talkPolly(this.state, resultToRender);
+
+    talkPolly(this.state, resultToRender ? resultToRender : '0');
     return
   }
 
   componentDidMount() {
     document.body.addEventListener('keydown', this.handleKey);
-
   }
 
   render() {
