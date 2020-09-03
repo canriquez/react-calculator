@@ -34,9 +34,8 @@ class App extends React.Component {
   handleClick(buttonName) {
     // eslint-disable-next-line
     const {
-      total, speech, lang,
+      speech, lang,
     } = this.state;
-    const speechBar = ['Speech', 'En', 'Sp', 'PTT'];
 
     if (buttonName === 'Speech') {
       this.toggleSpeech();
@@ -57,10 +56,8 @@ class App extends React.Component {
     }
 
     const currentResult = calculate(this.state, buttonName);
-    console.log(buttonName);
     this.setState(currentResult, () => {
       let ttSpeech = buttonName;
-      console.log(this.state.total);
       if (speech) {
         if (buttonName === '-' && lang === 'Joanna') { ttSpeech = 'minus'; }
         if (buttonName === 'x' && lang === 'Mia') { ttSpeech = 'multiplicado por'; }
@@ -75,16 +72,14 @@ class App extends React.Component {
         } else {
           talkPolly(this.state, ttSpeech);
         }
-      };
-    })
-
+      }
+    });
   }
 
   handleKey(e) {
-
     if (e.key === 'Enter') {
-      e.preventDefault()
-      e.stopPropagation()
+      e.preventDefault();
+      e.stopPropagation();
     }
     const {
       speech, lang,
@@ -187,15 +182,13 @@ class App extends React.Component {
   }
 
   pttDisplay(txt = '') {
-    console.log(this.state);
     const { total, next, operation } = this.state;
     let resultToRender = '';
     if (operation && !next) { resultToRender = total; }
     if (operation && next) { resultToRender = next; }
     if (!operation && total) { resultToRender = total; }
     resultToRender = txt + resultToRender;
-    console.log('result to render $$ ' + resultToRender)
-    if (resultToRender === '') { resultToRender = '= 0' }
+    if (resultToRender === '') { resultToRender = '= 0'; }
 
     talkPolly(this.state, resultToRender);
   }

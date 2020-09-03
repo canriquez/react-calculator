@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = props => {
-
   const handleClick = e => {
     e.stopPropagation();
     props.clickHandler(e.target.id);
