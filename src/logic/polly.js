@@ -11,8 +11,8 @@ const talkPolly = (conf, text) => {
     let polly = new AWS.Polly();
     let params = {
         OutputFormat: "mp3",
-        Text: text,
-        TextType: "text",
+        Text: "<speak><prosody rate='120%'>" + text + "</prosody></speak>",
+        TextType: "ssml",
         VoiceId: conf.lang
     }
 

@@ -130,7 +130,7 @@ class App extends React.Component {
     if (this.state.lang === 'Joanna') {
       console.log('to Mia');
       this.setState({ lang: 'Mia' }, () => {
-        talkPolly(this.state, 'Idioma espanol activado.');
+        talkPolly(this.state, 'espanol activado.');
       });
       onBtn('Sp');
       offBtn('En');
@@ -141,7 +141,7 @@ class App extends React.Component {
     } else {
       console.log('to Joanna');
       this.setState({ lang: 'Joanna' }, () => {
-        talkPolly(this.state, 'English language activated.');
+        talkPolly(this.state, 'English activated.');
       });
       onBtn('En');
       offBtn('Sp');
@@ -180,6 +180,9 @@ class App extends React.Component {
         </audio>
         <Display result={resultToRender} />
         <ButtonPanel clickHandler={this.handleClick} />
+        <a className="brand" href="https://www.carlosanriquez.com">
+          <img src="https://img.shields.io/badge/Developed%20by-Carlos%20Anriquez-red" alt="carlos anriquez" />
+        </a>
       </div>
     );
   }
