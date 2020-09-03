@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ButtonPanel = props => {
-
-
   const handleClick = buttonName => {
     props.clickHandler(buttonName);
   };
@@ -18,11 +16,11 @@ const ButtonPanel = props => {
     5: ['0', '.', '='],
   };
 
-  const buttonType = (bttn) => {
-    if (panelKeys[0].includes(bttn)) { return 1 }
-    if (bttn === '0') { return 3 }
-    return 2
-  }
+  const buttonType = bttn => {
+    if (panelKeys[0].includes(bttn)) { return 1; }
+    if (bttn === '0') { return 3; }
+    return 2;
+  };
 
   const panelTag = [];
 

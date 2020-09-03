@@ -1,11 +1,12 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import Display from './Display';
 import ButtonPanel from './ButtonPanel';
-import calculate from '../logic/calculate'
-import talkPolly from '../logic/polly'
-import { onBtn, offBtn, onIcon, offIcon } from '../logic/helper'
-
-
+import calculate from '../logic/calculate';
+import talkPolly from '../logic/polly';
+import {
+  onBtn, offBtn, onIcon, offIcon,
+} from '../logic/helper';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class App extends React.Component {
       operation: null,
       ondisplay: null,
       speech: false,
-      lang: 'Joanna'
+      lang: 'Joanna',
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -26,127 +27,129 @@ class App extends React.Component {
     this.pttDisplay = this.pttDisplay.bind(this);
   }
 
-
+  componentDidMount() {
+    document.body.addEventListener('keydown', this.handleKey);
+  }
 
   handleClick(buttonName) {
+    // eslint-disable-next-line
+    const {
+      total, speech, lang,
+    } = this.state;
     const speechBar = ['Speech', 'En', 'Sp', 'PTT'];
 
     if (buttonName === 'Speech') {
       this.toggleSpeech();
-      return
+      return;
     }
-    if ((buttonName === 'En' || buttonName === 'Sp') && this.state.speech) {
-      console.log('about to toggle language')
+    if ((buttonName === 'En' || buttonName === 'Sp') && speech) {
       this.toggleLanguage();
-      return
-    } else if (buttonName === 'En' || buttonName === 'Sp') {
-      return
+      return;
+    } if (buttonName === 'En' || buttonName === 'Sp') {
+      return;
     }
 
-    if ((buttonName === 'PTT') && this.state.speech) {
-      console.log('about to toggle ptt')
+    if ((buttonName === 'PTT') && speech) {
       this.pttDisplay();
-      return
-    } else if (buttonName === 'PTT') {
-      return
+      return;
+    } if (buttonName === 'PTT') {
+      return;
     }
 
     const currentResult = calculate(this.state, buttonName);
     this.setState(currentResult);
-
-    if (this.state.speech && !speechBar.includes(buttonName)) {
-      if (buttonName === '-' && this.state.lang === 'Joanna') { buttonName = 'minus' };
-      if (buttonName === 'x' && this.state.lang === 'Mia') { buttonName = 'multiplicado por' };
-      if (buttonName === '÷' && this.state.lang === 'Mia') { buttonName = 'dividido entre' };
-      if (buttonName === '-' && this.state.lang === 'Mia') { buttonName = 'menos' };
-      if (buttonName === 'x' && this.state.lang === 'Joanna') { buttonName = 'multiplied by' };
-      if (buttonName === '+/-' && this.state.lang === 'Joanna') { buttonName = 'negative' };
-      if (buttonName === '+/-' && this.state.lang === 'Mia') { buttonName = 'negativo' };
-      if (buttonName === '=') { buttonName = '= ' + (this.state.total ? this.state.total : '0') };
-      talkPolly(this.state, buttonName);
+    let ttSpeech = buttonName;
+    if (speech && !speechBar.includes(buttonName)) {
+      if (buttonName === '-' && lang === 'Joanna') { ttSpeech = 'minus'; }
+      if (buttonName === 'x' && lang === 'Mia') { ttSpeech = 'multiplicado por'; }
+      if (buttonName === '÷' && lang === 'Mia') { ttSpeech = 'dividido entre'; }
+      if (buttonName === '-' && lang === 'Mia') { ttSpeech = 'menos'; }
+      if (buttonName === 'x' && lang === 'Joanna') { ttSpeech = 'multiplied by'; }
+      if (buttonName === '+/-' && lang === 'Joanna') { ttSpeech = 'negative'; }
+      if (buttonName === '+/-' && lang === 'Mia') { ttSpeech = 'negativo'; }
+      if (buttonName === '=') { ttSpeech = `= ${total || '0'}`; }
+      talkPolly(this.state, ttSpeech);
     }
   }
 
   handleKey(e) {
+    const {
+      total, speech, lang,
+    } = this.state;
     const allowedKeys = ['s', 'l', 'p', 'Enter', 'Backspace',
       '%', '/', '7', '8', '9', 'x', '4', '5', '6',
-      '-', '_', '*', '1', '2', '3', '+', '0', '.', '=']
-    if (!allowedKeys.includes(e.key)) { return }
+      '-', '_', '*', '1', '2', '3', '+', '0', '.', '='];
+    if (!allowedKeys.includes(e.key)) { return; }
     e.stopPropagation();
-    console.log('hit :' + e.key);
-    const speechBar = ['Speech', 'En', 'Sp', 'PTT'];
 
     let keyName = e.key;
     if (e.key === 's') {
-      this.toggleSpeech()
-      return
-    };
+      this.toggleSpeech();
+      return;
+    }
 
-    if ((keyName === 'l') && this.state.speech) {
-      console.log('about to toggle language')
+    if ((keyName === 'l') && speech) {
       this.toggleLanguage();
-      return
-    } else if (keyName === 'l') {
-      return
+      return;
+    } if (keyName === 'l') {
+      return;
     }
 
-    if ((keyName === 'p') && this.state.speech) {
-      console.log('about to toggle ptt')
+    if ((keyName === 'p') && speech) {
       this.pttDisplay();
-      return
-    } else if (keyName === 'p') {
-      return
+      return;
+    } if (keyName === 'p') {
+      return;
     }
 
-    if (e.key === '/') { keyName = '÷' };
-    if (e.key === 'x' || e.key === '*') { keyName = 'x' };
-    if (e.key === 'Backspace') { keyName = 'AC' };
-    if (e.key === 'Enter') { keyName = '=' };
-    if (e.key === '_') { keyName = '+/-' }
+    if (e.key === '/') { keyName = '÷'; }
+    if (e.key === 'x' || e.key === '*') { keyName = 'x'; }
+    if (e.key === 'Backspace') { keyName = 'AC'; }
+    if (e.key === 'Enter') { keyName = '='; }
+    if (e.key === '_') { keyName = '+/-'; }
     const currentResult = calculate(this.state, keyName);
     this.setState(currentResult);
-    if (this.state.speech /* && !speechBar.includes(keyName) */) {
-      if (keyName === '-') { keyName = 'minus' };
-      if (keyName === 'x' && this.state.lang === 'Mia') { keyName = 'multiplicado por' };
-      if (keyName === '÷' && this.state.lang === 'Mia') { keyName = 'dividido entre' };
-      if (keyName === 'x' && this.state.lang === 'Joanna') { keyName = 'multiplied by' };
-      if (keyName === '+/-') { keyName = 'negative' };
-      if (keyName === '+/-' && this.state.lang === 'Mia') { keyName = 'negativo' };
-      if (keyName === 'Shift') { return };
-      if (keyName === '=' || keyName === 'Enter') { keyName = '= ' + (this.state.total ? this.state.total : '0') };
+    if (speech /* && !speechBar.includes(keyName) */) {
+      if (keyName === '-' && lang === 'Joanna') { keyName = 'minus'; }
+      if (keyName === 'x' && lang === 'Mia') { keyName = 'multiplicado por'; }
+      if (keyName === '÷' && lang === 'Mia') { keyName = 'dividido entre'; }
+      if (keyName === 'x' && lang === 'Joanna') { keyName = 'multiplied by'; }
+      if (keyName === '+/-' && lang === 'Joanna') { keyName = 'negative'; }
+      if (keyName === '+/-' && lang === 'Mia') { keyName = 'negativo'; }
+      if (keyName === 'Shift') { return; }
+      if (keyName === '=' || keyName === 'Enter') { keyName = `= ${total || '0'}`; }
 
       talkPolly(this.state, keyName);
-
     }
   }
 
   toggleSpeech() {
-    if (!this.state.speech) {
+    const { speech } = this.state;
+    if (!speech) {
       talkPolly(this.state, 'Speech enabled.');
       this.setState(state => ({ speech: !state.speech }));
-      onBtn('Speech')
-      onIcon('speechico')
+      onBtn('Speech');
+      onIcon('speechico');
       onBtn('En');
       onIcon('en');
-      //show little icon on speach top left of screen
-      //show little icon on English language per default
+      // show little icon on speach top left of screen
+      // show little icon on English language per default
     } else {
       talkPolly(this.state, 'Speech disabled.');
       this.setState(state => ({ speech: !state.speech }));
-      offBtn('Speech')
-      offIcon('speechico')
+      offBtn('Speech');
+      offIcon('speechico');
       offBtn('En');
       offBtn('Sp');
       offIcon('es');
       offIcon('en');
-      //hide little icon on speach top left of screen
+      // hide little icon on speach top left of screen
     }
   }
 
   toggleLanguage() {
-    console.log('toggling language')
-    if (this.state.lang === 'Joanna') {
-      console.log('to Mia');
+    const { lang } = this.state;
+    if (lang === 'Joanna') {
       this.setState({ lang: 'Mia' }, () => {
         talkPolly(this.state, 'espanol activado.');
       });
@@ -154,10 +157,9 @@ class App extends React.Component {
       offBtn('En');
       onIcon('es');
       offIcon('en');
-      //show little icon on speach top left of screen
-      //show little icon on English language per default
+      // show little icon on speach top left of screen
+      // show little icon on English language per default
     } else {
-      console.log('to Joanna');
       this.setState({ lang: 'Joanna' }, () => {
         talkPolly(this.state, 'English activated.');
       });
@@ -165,7 +167,7 @@ class App extends React.Component {
       offBtn('Sp');
       onIcon('en');
       offIcon('es');
-      //hide little icon on speach top left of screen
+      // hide little icon on speach top left of screen
     }
   }
 
@@ -176,12 +178,7 @@ class App extends React.Component {
     if (operation && next) { resultToRender = next; }
     if (!operation) { resultToRender = total; }
 
-    talkPolly(this.state, resultToRender ? resultToRender : '0');
-    return
-  }
-
-  componentDidMount() {
-    document.body.addEventListener('keydown', this.handleKey);
+    talkPolly(this.state, resultToRender || '0');
   }
 
   render() {
@@ -193,7 +190,7 @@ class App extends React.Component {
 
     return (
       <div id="app-container">
-        <audio id="polly" >
+        <audio id="polly">
           <source src="" className="track" type="audio/mpeg" />
         </audio>
         <Display result={resultToRender} />
