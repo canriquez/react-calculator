@@ -55,16 +55,22 @@ class App extends React.Component {
     this.setState(currentResult);
 
     if (this.state.speech && !speechBar.includes(buttonName)) {
+      if (buttonName === '-' && this.state.lang === 'Joanna') { buttonName = 'minus' };
+      if (buttonName === 'x' && this.state.lang === 'Mia') { buttonName = 'multiplicado por' };
+      if (buttonName === '÷' && this.state.lang === 'Mia') { buttonName = 'dividido entre' };
+      if (buttonName === '-' && this.state.lang === 'Mia') { buttonName = 'menos' };
+      if (buttonName === 'x' && this.state.lang === 'Joanna') { buttonName = 'multiplied by' };
+      if (buttonName === '+/-' && this.state.lang === 'Joanna') { buttonName = 'negative' };
+      if (buttonName === '+/-' && this.state.lang === 'Mia') { buttonName = 'negativo' };
+      if (buttonName === '=') { buttonName = '= ' + (this.state.total ? this.state.total : '0') };
       talkPolly(this.state, buttonName);
     }
   }
 
   handleKey(e) {
-
-
     const allowedKeys = ['s', 'l', 'p', 'Enter', 'Backspace',
       '%', '/', '7', '8', '9', 'x', '4', '5', '6',
-      '-', '_', '1', '2', '3', '+', '0', '.', '=']
+      '-', '_', '*', '1', '2', '3', '+', '0', '.', '=']
     if (!allowedKeys.includes(e.key)) { return }
     e.stopPropagation();
     console.log('hit :' + e.key);
@@ -99,11 +105,13 @@ class App extends React.Component {
     if (e.key === '_') { keyName = '+/-' }
     const currentResult = calculate(this.state, keyName);
     this.setState(currentResult);
-    if (this.state.speech && !speechBar.includes(keyName)) {
+    if (this.state.speech /* && !speechBar.includes(keyName) */) {
       if (keyName === '-') { keyName = 'minus' };
-      if (keyName === 'x' && this.lang === 'Mia') { keyName = 'multiplicado por' };
-      if (keyName === 'x' && this.lang === 'Joanna') { keyName = 'multiplied by' };
+      if (keyName === 'x' && this.state.lang === 'Mia') { keyName = 'multiplicado por' };
+      if (keyName === '÷' && this.state.lang === 'Mia') { keyName = 'dividido entre' };
+      if (keyName === 'x' && this.state.lang === 'Joanna') { keyName = 'multiplied by' };
       if (keyName === '+/-') { keyName = 'negative' };
+      if (keyName === '+/-' && this.state.lang === 'Mia') { keyName = 'negativo' };
       if (keyName === 'Shift') { return };
       if (keyName === '=' || keyName === 'Enter') { keyName = '= ' + (this.state.total ? this.state.total : '0') };
 
