@@ -175,7 +175,7 @@ class App extends React.Component {
 
     return (
       <div id="app-container">
-        <audio id="polly">
+        <audio id="polly" >
           <source src="" className="track" type="audio/mpeg" />
         </audio>
         <Display result={resultToRender} />

@@ -23,7 +23,7 @@ const talkPolly = (conf, text) => {
         } else {
             let uInt8Array = new Uint8Array(data.AudioStream);
             let arrayBuffer = uInt8Array.buffer;
-            let blob = new Blob([arrayBuffer]);
+            let blob = new Blob([arrayBuffer], { type: 'audio/mpeg' });
 
             let audio = document.getElementById('polly');
             let url = URL.createObjectURL(blob);

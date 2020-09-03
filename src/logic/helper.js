@@ -22,4 +22,5 @@ const offIcon = (icon) => {
     targetIcon.classList.add('offIcon');
 }
 
+
 export { onBtn, offBtn, onIcon, offIcon };
