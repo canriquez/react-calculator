@@ -16,7 +16,13 @@
 ### Normal operation
 
 - You can use the calculator by clicking on the buttons or touch screen device as a standard calculator.
-- You can key the numbers and operations using the keyboard.
+- You can key the numbers and operations using the keyboard. 
+#### Special Keys:
+- ```Enter```              => '='
+- ```delete/backspace```   => 'AC'
+- ```_```     =>    '+/-'
+- ``` / ```   => Division simbol
+- ``` * or x ``` => Multiplication Symbol
 
 ### Activate Text to Speech functionality:
 - Touch/Click: Speech function is activated clicking/touching the button `Speech`. 
@@ -111,8 +117,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-my Family
-The Beagles!
+- My Family
+- The Beagles!
 ## 📝 License
 
 This project is [MIT](lic.url) licensed.
