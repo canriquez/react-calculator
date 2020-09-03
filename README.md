@@ -2,12 +2,12 @@
 
 # React Calculator
 
-> Accesibility focused basic React calculator bootstrapped with create-react-app
+> Accessibility focused basic React calculator bootstrapped with create-react-app
 
 ![screenshot](./app_screenshot.png)
 
-- Calculator App with strong focus on accessibility build with React.js. Practicing React Component classes, states and props and AWS Polly.
-- This project is far from perfect. I decided to practice some basic ideas about accesibility by usig full controll via keyboard / mouse.
+- Calculator App with a strong focus on accessibility built with React.js. Practicing React Component classes, states, props, and AWS Polly.
+- This project is far from perfect. I decided to practice some basic ideas about accessibility by implementing full control via keyboard/mouse.
 - This project is also a practice implementation for the AWS service [Amazon Polly](https://aws.amazon.com/polly/)
 
 
@@ -15,20 +15,25 @@
 
 ### Normal operation
 
-- You can use the calculator by clicking on the buttons or touch screen device as a normal calculator.
+- You can use the calculator by clicking on the buttons or touch screen device as a standard calculator.
 - You can key the numbers and operations using the keyboard.
 
 ### Activate Text to Speech functionality:
-- Touck/Click: Speech function is activated clicking/touching the button `Speech`. 
-- Keyboard: Typing the key 's'. 
-- On activation you will hear a voice with an activation message en english (default language).
+- Touch/Click: Speech function is activated clicking/touching the button `Speech`. 
+- Keyboard: Typing the key 's' (lower case)
+- On activation, you will hear a voice with an activation message en English (default language).
 - A Icon  ![](./src/assets/icons/speech.svg) will appear on display to indicate the Text to Speech activation. 
 
-### Change text to speech language 
+### Change text to speech-language :  Spanish / English
 - Touch/Click: on buttons `En` or `Sp` for language toggling.
-- On Toggling you will here a voice on the selected language. The proper Icons will appear on Display.
+- Keyboard: Typing the key 'l' (lower case) for language toggling.
+- On Toggling, you will hear a voice on the selected language. The proper Icons will appear on Display.
 
-
+### Push To Talk functionality: PTT
+Touch/Click: on PTT button for PTT function activation.
+- Keyboard: Typing the key 'p' (lower case) for the push to talk function.
+On activation, this function will read out loud the Display contents.
+A similar effect can be achieved by using the '=' sign.
 
 ## Built With
 
@@ -50,7 +55,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running, follow these simple example steps.
 
 ### Prerequisites
 
@@ -96,7 +101,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](issues/).
 
@@ -106,10 +111,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
-
+my Family
+The Beagles!
 ## 📝 License
 
 This project is [MIT](lic.url) licensed.
