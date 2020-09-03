@@ -1,4 +1,5 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4f145487-140e-4e4f-80f7-d552dcbcc0d1/deploy-status)](https://app.netlify.com/sites/anriquez-calculator/deploys)
 
 # Accesible React Calculator
 
@@ -21,7 +22,7 @@
 - ```Enter```              => '='
 - ```delete/backspace```   => 'AC'
 - ```_```     =>    '+/-'
-- ``` / ```   => Division simbol
+- ``` / ```   => Division symbol
 - ``` * or x ``` => Multiplication Symbol
 
 ### Activate Text to Speech functionality:
@@ -50,9 +51,10 @@ A similar effect can be achieved by using the '=' sign.
 - AWS Polly
 
 
-## Live Demo @Heroku
+## Live Demo on Netlify
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4f145487-140e-4e4f-80f7-d552dcbcc0d1/deploy-status)](https://app.netlify.com/sites/anriquez-calculator/deploys)
 
-[Live Demo Link](https://anriquez-react-calcu.herokuapp.com)
+[Live Demo Link](https://anriquez-calculator.netlify.app/)
 
 
 ## Getting Started
