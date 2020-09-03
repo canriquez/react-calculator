@@ -1,14 +1,14 @@
 import Big from 'big.js/big.mjs';
 
 const operate = (numberOne, numberTwo, operation) => {
+  if (numberTwo === '0' || !numberTwo) {
+    return 'Error';
+  }
   const nOne = Big(numberOne);
   const nTwo = Big(numberTwo);
 
   switch (operation) {
     case '÷':
-      if (numberTwo === '0') {
-        return 'Error';
-      }
       return nOne.div(nTwo).toString();
 
     case 'x':

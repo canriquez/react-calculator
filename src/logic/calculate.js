@@ -27,14 +27,19 @@ const calculate = (calcData, buttonName) => {
   if (buttonName === '%') {
     // when operation exist, applies to the percent to total after
     // executing operation
-    if (operation) {
+    if (operation && (total !== '0' || next !== '0')) {
+      const ops = operate(total, next, operation);
+      let result;
+      // eslint-disable-next-line
+      ops !== 'Error' ? result = Big(ops).div(100).toString() : result = ops;
       return {
-        total: (Big(operate(total, next, operation)).div(100)).toString(),
+        total: result,
         next: null,
         operation: null,
       };
     }
     // when no operation exist, applies percent to total only
+    if (!total || total === '0') { return { total, next, operation }; }
     return {
       total: (Big(total).div(100).toString()),
       next,
@@ -87,11 +92,21 @@ const calculate = (calcData, buttonName) => {
     };
   }
   // if user hist another operation with total and next. (solve opeartions concatenation)
-  if (isOperation(buttonName) && total && operation) {
+  if (isOperation(buttonName) && total && next && operation) {
     // solves the current operatoin. clear next and stores new operation
     return {
       total: Big(operate(total, next, operation)).toString(),
       next: null,
+      operation: buttonName,
+    };
+  }
+
+  // if user hist another operation with total and no next. updates operation
+  if (isOperation(buttonName) && total && !next) {
+    // solves the current operatoin. clear next and stores new operation
+    return {
+      total,
+      next,
       operation: buttonName,
     };
   }

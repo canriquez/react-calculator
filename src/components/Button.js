@@ -9,10 +9,13 @@ const Button = props => {
 
   const { buttonName, wide, color } = props;
   let buttonStyles = '';
-  if (wide) {
+
+  if (wide === 3) {
     buttonStyles += 'wide button';
-  } else {
+  } else if (wide === 2) {
     buttonStyles += 'small button';
+  } else {
+    buttonStyles += 'top-row btop disabled';
   }
   buttonStyles += ` ${color}`;
 
@@ -39,7 +42,7 @@ Button.defaultProps = {
 };
 Button.propTypes = {
   buttonName: PropTypes.string,
-  wide: PropTypes.bool,
+  wide: PropTypes.number,
   color: PropTypes.string,
   clickHandler: PropTypes.func,
 };
