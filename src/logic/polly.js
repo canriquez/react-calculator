@@ -11,18 +11,29 @@ const talkPolly = (conf, text, buttonId) => {
 
   const polly = new AWS.Polly();
 
-  const voices = ['Joanna', 'Mia']
+  const voiceSetup = ['Joanna', 'Mia']
+
+  const voiceOptions = {
+    'Joanna': { engine: 'standard', lang: 'Joanna', sr: '22050' },
+    'Mia': { engine: 'standard', lang: 'Mia', sr: '22050' },
+    'Kevin': { engine: 'neural', lang: 'Kevin', sr: '24000' }
+  }
 
   const params = {
+    Engine: voiceOptions[voiceSetup[conf.lang]].engine,
     OutputFormat: 'mp3',
     Text: `<speak><prosody rate='120%'>${text}</prosody></speak>`,
     TextType: 'ssml',
-    VoiceId: voices[conf.lang],
+    SampleRate: voiceOptions[voiceSetup[conf.lang]].sr,
+    VoiceId: voiceOptions[voiceSetup[conf.lang]].lang,
   };
+
+  console.log(params);
 
   polly.synthesizeSpeech(params, (err, data) => {
     if (err) {
       // an error ocurred
+      console.log(err, err.stack)
     } else {
       const uInt8Array = new Uint8Array(data.AudioStream);
       const arrayBuffer = uInt8Array.buffer;
