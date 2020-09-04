@@ -111,7 +111,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/canriquez/react-calculator/issues).
 
 ## Show your support
 
@@ -123,4 +123,4 @@ Give a ⭐️ if you like this project!
 - The Beagles!
 ## 📝 License
 
-This project is [MIT](lic.url) licensed.
+This project is [MIT](./LICENSE) licensed.
