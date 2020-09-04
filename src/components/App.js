@@ -5,7 +5,7 @@ import ButtonPanel from './ButtonPanel';
 import calculate from '../logic/calculate';
 import talkPolly from '../logic/polly';
 import {
-  onBtn, offBtn, onIcon, offIcon,
+  onBtn, offBtn, onIcon, offIcon, key2Click,
 } from '../logic/helper';
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
       operation: null,
       ondisplay: null,
       speech: false,
-      lang: 'Joanna',
+      lang: 0,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -39,18 +39,18 @@ class App extends React.Component {
     } = this.state;
 
     if (buttonName === 'Speech') {
-      this.toggleSpeech();
+      this.toggleSpeech(buttonName);
       return;
     }
     if ((buttonName === 'En' || buttonName === 'Sp') && speech) {
-      this.toggleLanguage();
+      this.toggleLanguage(buttonName);
       return;
     } if (buttonName === 'En' || buttonName === 'Sp') {
       return;
     }
 
     if ((buttonName === 'PTT') && speech) {
-      this.pttDisplay();
+      this.pttDisplay(buttonName);
       return;
     } if (buttonName === 'PTT') {
       return;
@@ -60,18 +60,18 @@ class App extends React.Component {
     this.setState(currentResult, () => {
       let ttSpeech = buttonName;
       if (speech) {
-        if (buttonName === '-' && lang === 'Joanna') { ttSpeech = 'minus'; }
-        if (buttonName === 'x' && lang === 'Mia') { ttSpeech = 'multiplicado por'; }
-        if (buttonName === '÷' && lang === 'Mia') { ttSpeech = 'dividido entre'; }
-        if (buttonName === '-' && lang === 'Mia') { ttSpeech = 'menos'; }
-        if (buttonName === 'x' && lang === 'Joanna') { ttSpeech = 'multiplied by'; }
-        if (buttonName === '+/-' && lang === 'Joanna') { ttSpeech = 'negative'; }
-        if (buttonName === '+/-' && lang === 'Mia') { ttSpeech = 'negativo'; }
+        if (buttonName === '-' && lang === 0) { ttSpeech = 'minus'; }
+        if (buttonName === 'x' && lang === 1) { ttSpeech = 'multiplicado por'; }
+        if (buttonName === '÷' && lang === 1) { ttSpeech = 'dividido entre'; }
+        if (buttonName === '-' && lang === 1) { ttSpeech = 'menos'; }
+        if (buttonName === 'x' && lang === 0) { ttSpeech = 'multiplied by'; }
+        if (buttonName === '+/-' && lang === 0) { ttSpeech = 'negative'; }
+        if (buttonName === '+/-' && lang === 1) { ttSpeech = 'negativo'; }
 
         if (ttSpeech === '=') {
           this.pttDisplay('= ');
         } else {
-          talkPolly(this.state, ttSpeech);
+          talkPolly(this.state, ttSpeech, buttonName);
         }
       }
     });
@@ -88,24 +88,25 @@ class App extends React.Component {
     const allowedKeys = ['s', 'l', 'p', 'Enter', 'Backspace',
       '%', '/', '7', '8', '9', 'x', '4', '5', '6',
       '-', '_', '*', '1', '2', '3', '+', '0', '.', '='];
+
     if (!allowedKeys.includes(e.key)) { return; }
     e.stopPropagation();
 
     let keyName = e.key;
     if (e.key === 's') {
-      this.toggleSpeech();
+      this.toggleSpeech(key2Click(e.key));
       return;
     }
 
     if ((keyName === 'l') && speech) {
-      this.toggleLanguage();
+      this.toggleLanguage(key2Click(e.key));
       return;
     } if (keyName === 'l') {
       return;
     }
 
     if ((keyName === 'p') && speech) {
-      this.pttDisplay();
+      this.pttDisplay(key2Click(e.key), '');
       return;
     } if (keyName === 'p') {
       return;
@@ -119,26 +120,26 @@ class App extends React.Component {
     const currentResult = calculate(this.state, keyName);
     this.setState(currentResult);
     if (speech) {
-      if (keyName === '-' && lang === 'Joanna') { keyName = 'minus'; }
-      if (keyName === '-' && lang === 'Mia') { keyName = 'menos'; }
-      if (keyName === 'x' && lang === 'Mia') { keyName = 'multiplicado por'; }
-      if (keyName === '÷' && lang === 'Mia') { keyName = 'dividido entre'; }
-      if (keyName === 'x' && lang === 'Joanna') { keyName = 'multiplied by'; }
-      if (keyName === '+/-' && lang === 'Joanna') { keyName = 'negative'; }
-      if (keyName === '+/-' && lang === 'Mia') { keyName = 'negativo'; }
+      if (keyName === '-' && lang === 0) { keyName = 'minus'; }
+      if (keyName === '-' && lang === 1) { keyName = 'menos'; }
+      if (keyName === 'x' && lang === 1) { keyName = 'multiplicado por'; }
+      if (keyName === '÷' && lang === 1) { keyName = 'dividido entre'; }
+      if (keyName === 'x' && lang === 0) { keyName = 'multiplied by'; }
+      if (keyName === '+/-' && lang === 0) { keyName = 'negative'; }
+      if (keyName === '+/-' && lang === 1) { keyName = 'negativo'; }
       if (keyName === 'Shift') { return; }
       if (keyName === '=' || keyName === 'Enter') {
         this.pttDisplay('= ');
       } else {
-        talkPolly(this.state, keyName);
+        talkPolly(this.state, keyName, key2Click(e.key));
       }
     }
   }
 
-  toggleSpeech() {
+  toggleSpeech(buttonName) {
     const { speech } = this.state;
     if (!speech) {
-      talkPolly(this.state, 'Speech enabled.');
+      talkPolly(this.state, 'Speech enabled.', buttonName);
       this.setState(state => ({ speech: !state.speech }));
       onBtn('Speech');
       onIcon('speechico');
@@ -147,7 +148,7 @@ class App extends React.Component {
       // show little icon on speach top left of screen
       // show little icon on English language per default
     } else {
-      talkPolly(this.state, 'Speech disabled.');
+      talkPolly(this.state, 'Speech disabled.', buttonName);
       this.setState(state => ({ speech: !state.speech }));
       offBtn('Speech');
       offIcon('speechico');
@@ -159,11 +160,11 @@ class App extends React.Component {
     }
   }
 
-  toggleLanguage() {
+  toggleLanguage(buttonName) {
     const { lang } = this.state;
-    if (lang === 'Joanna') {
-      this.setState({ lang: 'Mia' }, () => {
-        talkPolly(this.state, 'espanol activado.');
+    if (lang === 0) {
+      this.setState({ lang: 1 }, () => {
+        talkPolly(this.state, 'espanol activado.', buttonName);
       });
       onBtn('Sp');
       offBtn('En');
@@ -172,8 +173,8 @@ class App extends React.Component {
       // show little icon on speach top left of screen
       // show little icon on English language per default
     } else {
-      this.setState({ lang: 'Joanna' }, () => {
-        talkPolly(this.state, 'English activated.');
+      this.setState({ lang: 0 }, () => {
+        talkPolly(this.state, 'English activated.', buttonName);
       });
       onBtn('En');
       offBtn('Sp');
@@ -183,7 +184,7 @@ class App extends React.Component {
     }
   }
 
-  pttDisplay(txt = '') {
+  pttDisplay(buttonName, txt = '') {
     const { total, next, operation } = this.state;
     let resultToRender = '';
     if (operation && !next) { resultToRender = total; }
@@ -192,7 +193,7 @@ class App extends React.Component {
     resultToRender = txt + resultToRender;
     if (resultToRender === '') { resultToRender = '= 0'; }
 
-    talkPolly(this.state, resultToRender);
+    talkPolly(this.state, resultToRender, buttonName);
   }
 
   render() {
@@ -204,9 +205,9 @@ class App extends React.Component {
 
     return (
       <div id="app-container">
-        <audio id="polly">
+        {/*  <audio id="polly">
           <source src="" className="track" type="audio/mpeg" />
-        </audio>
+        </audio> */}
         <Display result={resultToRender} />
         <ButtonPanel clickHandler={this.handleClick} />
         <a id="brand" className="brand" href="https://www.carlosanriquez.com">

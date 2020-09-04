@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption, prefer-template */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -20,17 +21,22 @@ const Button = props => {
   buttonStyles += ` ${color}`;
 
   return (
-    <button
-      id={buttonName}
-      onClick={handleClick}
-      type="button"
-      key={`tecla_${buttonName}`}
-      className={buttonStyles}
-    >
-      {' '}
-      {buttonName}
-      {' '}
-    </button>
+    <>
+      <audio id={'audio-' + (buttonName !== '=' ? buttonName : 'equal')}>
+        <source src="" className="track" type="audio/mpeg" />
+      </audio>
+      <button
+        id={buttonName}
+        onClick={handleClick}
+        type="button"
+        key={`tecla_${buttonName}`}
+        className={buttonStyles}
+      >
+        {' '}
+        {buttonName}
+        {' '}
+      </button>
+    </>
   );
 };
 
