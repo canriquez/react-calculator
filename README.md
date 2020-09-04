@@ -37,10 +37,10 @@
 - On Toggling, you will hear a voice on the selected language. The proper Icons will appear on Display.
 
 ### Push To Talk functionality: PTT
-Touch/Click: on PTT button for PTT function activation.
+- Touch/Click: on PTT button for PTT function activation.
 - Keyboard: Typing the key 'p' (lower case) for the push to talk function.
-On activation, this function will read out loud the Display contents.
-A similar effect can be achieved by using the '=' sign.
+- On activation, this function will read out loud the Display contents.
+- A similar effect can be achieved by using the '=' sign.
 
 ## Built With
 
