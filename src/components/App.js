@@ -8,8 +8,6 @@ import {
   onBtn, offBtn, onIcon, offIcon,
 } from '../logic/helper';
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +28,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    document.title = "Accesible React Calculator"
+    document.title = 'Accesible React Calculator';
     document.body.addEventListener('keydown', this.handleKey);
   }
 
