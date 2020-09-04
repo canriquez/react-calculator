@@ -8,6 +8,8 @@ import {
   onBtn, offBtn, onIcon, offIcon,
 } from '../logic/helper';
 
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +30,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    document.title = "Accesible React Calculator"
     document.body.addEventListener('keydown', this.handleKey);
   }
 
@@ -119,6 +122,7 @@ class App extends React.Component {
     this.setState(currentResult);
     if (speech) {
       if (keyName === '-' && lang === 'Joanna') { keyName = 'minus'; }
+      if (keyName === '-' && lang === 'Mia') { keyName = 'menos'; }
       if (keyName === 'x' && lang === 'Mia') { keyName = 'multiplicado por'; }
       if (keyName === '÷' && lang === 'Mia') { keyName = 'dividido entre'; }
       if (keyName === 'x' && lang === 'Joanna') { keyName = 'multiplied by'; }
@@ -207,7 +211,7 @@ class App extends React.Component {
         </audio>
         <Display result={resultToRender} />
         <ButtonPanel clickHandler={this.handleClick} />
-        <a className="brand" href="https://www.carlosanriquez.com">
+        <a id="brand" className="brand" href="https://www.carlosanriquez.com">
           <img src="https://img.shields.io/badge/Developed%20by-Carlos%20Anriquez-red" alt="carlos anriquez" />
         </a>
       </div>
