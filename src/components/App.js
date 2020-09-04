@@ -5,7 +5,7 @@ import ButtonPanel from './ButtonPanel';
 import calculate from '../logic/calculate';
 import talkPolly from '../logic/polly';
 import {
-  onBtn, offBtn, onIcon, offIcon, key2Click
+  onBtn, offBtn, onIcon, offIcon, key2Click,
 } from '../logic/helper';
 
 class App extends React.Component {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption, prefer-template */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -21,7 +22,7 @@ const Button = props => {
 
   return (
     <>
-      <audio id={'audio-'+(buttonName !== '=' ? buttonName : 'equal')}>
+      <audio id={'audio-' + (buttonName !== '=' ? buttonName : 'equal')}>
         <source src="" className="track" type="audio/mpeg" />
       </audio>
       <button
