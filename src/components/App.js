@@ -212,6 +212,9 @@ class App extends React.Component {
         <a id="brand" className="brand" href="https://www.carlosanriquez.com">
           <img src="https://img.shields.io/badge/Developed%20by-Carlos%20Anriquez-red" alt="carlos anriquez" />
         </a>
+        <a id="repo" className="repo" href="https://github.com/canriquez/react-calculator">
+          <img src="https://img.shields.io/badge/Github-Repo-green" alt="repo" />
+        </a>
       </div>
     );
   }

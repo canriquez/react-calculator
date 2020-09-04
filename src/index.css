@@ -117,6 +117,12 @@
   left: 0;
 }
 
+.repo {
+  position: absolute;
+  top: 0px;
+  right: 0%;
+}
+
 @media screen and (max-width: 414px) {
   #app-container {
     max-width: 98%;
