@@ -144,7 +144,7 @@ const calculate = (calcData, buttonName) => {
         next,
         operation,
       };
-    } if (!next.includes('.')) {
+    } if (next && !next.includes('.')) {
       // if next gets a valid decimal period
       next += '.';
       return {
