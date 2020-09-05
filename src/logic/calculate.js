@@ -49,13 +49,25 @@ const calculate = (calcData, buttonName) => {
 
   if (buttonName === 'AC') {
     // clear second number in the operation
-    if (next && operation) {
+    console.log('AC : next = ' + next + ', operation = ' + operation)
+    if ((next && next !== '0') && operation) {
       return {
         total,
         next: '0',
         operation,
       };
     }
+
+    if (next === '0' && operation) {
+      return {
+        total: null,
+        next: null,
+        operation: null,
+      };
+    }
+
+    if (!next) { return { total, next, operation } };
+
     return {
       total: null,
       next: null,
@@ -70,8 +82,8 @@ const calculate = (calcData, buttonName) => {
       // when opertion exist. executes the operation
       return {
         total: operate(total, next, operation),
-        next: null,
-        operation: null,
+        next,
+        operation,
       };
     }
     // If no operation exist, exits with no change

@@ -32,6 +32,15 @@ class App extends React.Component {
     document.body.addEventListener('keydown', this.handleKey);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('this operation: ' + this.state.operation);
+    console.log('next operation: ' + nextState.operation);
+    if (this.state.operation === nextState.operation) {
+      return true
+    }
+    return false;
+  }
+
   handleClick(buttonName) {
     // eslint-disable-next-line
     const {
@@ -190,6 +199,8 @@ class App extends React.Component {
     if (operation && !next) { resultToRender = total; }
     if (operation && next) { resultToRender = next; }
     if (!operation && total) { resultToRender = total; }
+    if (!operation || this.shouldComponentUpdate) { resultToRender = total; }
+    if (next === '0' && !operation) { resultToRender = next };
     resultToRender = txt + resultToRender;
     if (resultToRender === '') { resultToRender = '= 0'; }
 
@@ -201,7 +212,9 @@ class App extends React.Component {
     let resultToRender = '';
     if (operation && !next) { resultToRender = total; }
     if (operation && next) { resultToRender = next; }
-    if (!operation) { resultToRender = total; }
+    if (!operation || this.shouldComponentUpdate) { resultToRender = total; }
+
+    console.log('to display :' + resultToRender)
 
     return (
       <div id="app-container">
