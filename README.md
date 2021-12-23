@@ -5,6 +5,11 @@
 
 > Accessibility focused basic React calculator bootstrapped with create-react-app
 
+## Live Demo on Netlify
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4f145487-140e-4e4f-80f7-d552dcbcc0d1/deploy-status)](https://app.netlify.com/sites/anriquez-calculator/deploys)
+
+[Live Demo Link](https://anriquez-calculator.netlify.app/)
+
 ![screenshot](./app_screenshot.png)
 
 - Calculator App with a strong focus on accessibility built with React.js. Practicing React Component classes, states, props, and AWS Polly.
@@ -49,12 +54,6 @@
 - ESlint, Stylelint
 - VSCode
 - AWS Polly
-
-
-## Live Demo on Netlify
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4f145487-140e-4e4f-80f7-d552dcbcc0d1/deploy-status)](https://app.netlify.com/sites/anriquez-calculator/deploys)
-
-[Live Demo Link](https://anriquez-calculator.netlify.app/)
 
 
 ## Getting Started
